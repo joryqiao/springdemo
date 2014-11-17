@@ -57,17 +57,11 @@ public class MemcachedManagerTest {
 	assertEquals("Hello", mcManager.get("key2"));
     }
     
-   // @Test
+    @Test
     public void testSpringIntegration() throws TimeoutException, InterruptedException, MemcachedException{
-	
 	ApplicationContext appContext = new ClassPathXmlApplicationContext(springConfigPath);
-	
 	MemcachedClient mcClient = (MemcachedClient) appContext.getBean("memcachedClient");
 	assertNotNull(mcClient);
-	
-	String key = "key1";
-	String value = "value1";
-	int exp = 3600;
 	
 	List<String> inputs = new ArrayList<String>();
 	for (int i = 0; i < 1000; i++) {
@@ -82,12 +76,6 @@ public class MemcachedManagerTest {
 	    System.out.println(mcClient.get("key" + i, 200));
 	}
 	
-//	try {
-////	    mcClient.set(key, exp, value);
-//	    assertEquals("value1", mcClient.get(key));
-//	} catch (TimeoutException | InterruptedException | MemcachedException e) {
-//	    e.printStackTrace();
-//	}
     }
     
     @Test
@@ -99,7 +87,7 @@ public class MemcachedManagerTest {
 	MemcachedClientBuilder builder = new XMemcachedClientBuilder(AddrUtil.getAddresses("192.168.234.81:11212"));
 	builder.setConnectionPoolSize(5); // set connection pool size to five
 	
-	builder.setConnectTimeout(20000);
+	builder.setConnectTimeout(0000);
 	builder.setCommandFactory(new BinaryCommandFactory());
 	MemcachedClient mcClient = builder.build();
 	
