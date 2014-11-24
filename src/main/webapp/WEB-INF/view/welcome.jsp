@@ -5,6 +5,7 @@
 <title>Welcome</title>
 </head>
 <body>
-Hi, Welcome you!
+Hi, Welcome you! 
+<h1>${message}</h1>
 </body>
 </html>
